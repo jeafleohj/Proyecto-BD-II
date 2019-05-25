@@ -52,7 +52,7 @@ Demographic::Demographic(std::vector<std::string> data) {
 	max_hispanic = std::stof(data[42]);
 }
 
-std::ostream& operator<<(std::ostream& os, const Demographic& d)  = data[0];
+std::ostream& operator<<(std::ostream& os, const Demographic& d) {
 	return os;
 }
 
