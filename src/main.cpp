@@ -9,8 +9,7 @@ int main(){
     Interface interface;
     
     while(true){
-        interface.displayMenu();
-        
+        interface.displayMenu(); 
     }
 
     return 0;
