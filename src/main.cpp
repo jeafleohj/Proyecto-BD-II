@@ -10,6 +10,7 @@ int main(){
     
     while(true){
         interface.displayMenu();
+        
     }
 
     return 0;

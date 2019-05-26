@@ -1,9 +1,7 @@
-#include "Response.h"
 #include "../engine/DataManager.h"
 
-class Interface{
-    Query query;
-    Response response;
+class Interface{ 
+    DataManager dataManager;
 
 public:
     Interface(){};
@@ -15,28 +13,22 @@ public:
              exit(EXIT_SUCCESS);
         }
         else{
-            requestQuery(statement);
-            DataManager dataManager(query);
-            dataManager.executeQuery();           
+            dataManager.requestQuery(statement); 
+            dataManager.executeQuery();
         }
-        
     };
-    
-    void requestQuery(std::string &_statement){
-            std::string column, table;
-            std::cin>>column>>table>>table;
-            query.setQuery(_statement, column, table);
-    };
+   
 
-    void printLastQuery(){
-        std::vector<std::string> queryVector = query.getQuery();
+   void printLastQuery(){
+        std::vector<std::string> queryVector = dataManager.accessQuery();
         std::cout<<queryVector[0]
                  <<" " + queryVector[1]
                  <<" FROM " << queryVector[2];
     };
+    
 
     /* TODO
-    void displayData(Table Table){
+    void displayData(Table _table){
     
     }*/
 };

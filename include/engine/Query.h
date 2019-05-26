@@ -7,23 +7,26 @@
 class Query{
     std::string statement;
     std::string column;
+    std::string adverb;
     std::string table;
 
- public: 
+public: 
     Query(){};
     
-    void setQuery(std::string &_statement, std::string &_column, std::string &_table){
+    void setQuery(std::string &_statement, std::string &_column, std::string &_adverb,std::string &_table){
         std::string auxStatement = _statement;
             
-        std::transform(auxStatement.begin(), auxStatement.end()
-                                    , auxStatement.begin(), ::toupper);
+        std::transform(auxStatement.begin(), auxStatement.end(), 
+                       auxStatement.begin(), ::toupper);
+       
         this->statement = auxStatement;
+        this->adverb = _adverb;
         this->column = _column;
         this->table = _table;
     };
 
     std::vector<std::string> getQuery(){
-        std::vector<std::string> queryVector{this->statement, this->column , this->table};
+        std::vector<std::string> queryVector{this->statement, this->column, this->adverb, this->table};
         return queryVector;
     };
 };
