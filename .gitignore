@@ -35,3 +35,5 @@ venv
 .\#*
 *.tar.xz
 bin
+# Vim files
+.*.swp
