@@ -10,8 +10,8 @@ using namespace std;
 int main(){
     Interface interface;
     DataManager dataManager;
-	FileManager fm("files/DEMOGRAPHICS.csv");
-	StaticHash sh("files/DEMOGRAPHICS.bin");
+	FileManager fm("res/flights/flight_delays_test.csv");
+	StaticHash sh("res/flights/flight_delays_test.bin");
     // while(true){
     //     interface.displayMenu();
     //     std::string statement, column, adverb, table;
