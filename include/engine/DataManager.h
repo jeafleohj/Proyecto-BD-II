@@ -5,7 +5,6 @@
 class DataManager{
     Query query;
     Table table;
-    
 public:
 
     DataManager(){};
@@ -42,8 +41,6 @@ public:
             std::cout<<"No match with statement "<<statement<<'\n'; 
         }
     };
-
-    
 
     std::vector<std::string> accessQuery(){
         return query.getQuery();
