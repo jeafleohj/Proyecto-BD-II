@@ -23,7 +23,7 @@ public:
         std::string statement = query.getQuery()[0];
         if(statement == "SELECT"){
             std::cout<<"executing a "<<statement<< "query\n";
-            
+        
         }
         else if(statement == "INSERT"){
             std::cout<<"executing a INSERT query\n";
@@ -35,6 +35,7 @@ public:
         else if(statement == "COPY"){
             std::cout<<"Loading a csv file\n";
             std::string filename = query.getQuery()[3];
+            FileManager fileManager;
             fileManager.readCSV(filename);
         }
         else{
