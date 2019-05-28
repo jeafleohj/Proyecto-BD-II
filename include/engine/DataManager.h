@@ -1,9 +1,11 @@
 #include "Query.h"
-#include "Response.h"
+#include "Table.h"
+#include "../filesystem/FileManager.h"
 
 class DataManager{
     Query query;
-    Response response;
+    Table table;
+    FileManager fileManager;
 
 public:
 
@@ -13,30 +15,34 @@ public:
         this->query = _query;
     };
 
-    void requestQuery(std::string &_statement){
-        std::string column, adverb, table;
-        std::cin>>column>>adverb>>table;
-        query.setQuery(_statement, column, adverb, table);
+    void receiveQuery(std::string &_statement, std::string &_column, 
+                      std::string &_adverb, std::string &_table){
+        query.setQuery(_statement, _column, _adverb, _table);
     }
 
     void executeQuery(){
-        if(query.getQuery()[0]=="SELECT"){
-            std::cout<<"executing a select query\n";
-
+        std::string statement = query.getQuery()[0];
+        if(statement == "SELECT"){
+            std::cout<<"executing a "<<statement<< "query\n";
+             
         }
-        else if(query.getQuery()[0]=="INSERT"){
+        else if(statement == "INSERT"){
             std::cout<<"executing a INSERT query\n";
         }
-        else if(query.getQuery()[0]=="DELETE"){
+        else if(statement == "DELETE"){
             std::cout<<"executing a DELETE query\n";
         }
-        else if(query.getQuery()[0]=="COPY"){
+        else if(statement == "COPY"){
             std::cout<<"Loading a csv file\n";
+            std::string filename = query.getQuery()[3];
+            fileManager.readCSV(filename);
         }
         else{
-            std::cout<<"No match with statement "<<query.getQuery()[0]<<'\n';
+            std::cout<<"No match with statement "<<statement<<'\n'; 
         }
     };
+
+    
 
     std::vector<std::string> accessQuery(){
         return query.getQuery();

@@ -1,34 +1,37 @@
 #include "../engine/DataManager.h"
+#include <algorithm>
 
 class Interface{ 
-    DataManager dataManager;
-
 public:
     Interface(){};
     void displayMenu(){
         std::cout<<"utecDB=# ";
-        std::string statement;
-        std::cin>>statement;
-        if(statement == "exit"){
-             exit(EXIT_SUCCESS);
-        }
-        else{
-            dataManager.requestQuery(statement); 
-            dataManager.executeQuery();
-        }
     };
-   
+    
+    void requestQuery(std::string &_statement, std::string &_column, 
+                      std::string &_adverb, std::string &_table){
+        std::cin>>_statement;
+        std::transform(_statement.begin(), _statement.end(), _statement.begin(), ::toupper);
 
-   void printLastQuery(){
+        if(_statement == "EXIT")
+            exit(EXIT_SUCCESS);
+        std::cin>>_column>>_adverb>>_table;
+        
+    }
+
+    
+
+
+    /* TO FIX
+    void printLastQuery(){
         std::vector<std::string> queryVector = dataManager.accessQuery();
         std::cout<<queryVector[0]
                  <<" " + queryVector[1]
                  <<" FROM " << queryVector[2];
     };
-    
+    */
 
-    /* TODO
     void displayData(Table _table){
-    
-    }*/
+        //TODO
+    }
 };
