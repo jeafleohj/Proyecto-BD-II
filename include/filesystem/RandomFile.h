@@ -1,11 +1,12 @@
 class RandomFile{
     
 public:
-    void insert(){
-    
+    bool insert(){
+        // if key already exists return false, else insert
+        
     };
 
-    void search(){
-         
+    int search(){
+       // Should return the position  
     }
 };

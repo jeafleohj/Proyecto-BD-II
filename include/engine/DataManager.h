@@ -5,8 +5,7 @@
 class DataManager{
     Query query;
     Table table;
-    FileManager fileManager;
-
+    
 public:
 
     DataManager(){};
@@ -24,10 +23,11 @@ public:
         std::string statement = query.getQuery()[0];
         if(statement == "SELECT"){
             std::cout<<"executing a "<<statement<< "query\n";
-             
+            
         }
         else if(statement == "INSERT"){
             std::cout<<"executing a INSERT query\n";
+            
         }
         else if(statement == "DELETE"){
             std::cout<<"executing a DELETE query\n";

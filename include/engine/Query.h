@@ -13,7 +13,8 @@ class Query{
 public: 
     Query(){};
     
-    void setQuery(std::string &_statement, std::string &_column, std::string &_adverb,std::string &_table){    
+    void setQuery(std::string &_statement, std::string &_column, 
+                  std::string &_adverb,std::string &_table){
         this->statement = _statement;
         this->adverb = _adverb;
         this->column = _column;

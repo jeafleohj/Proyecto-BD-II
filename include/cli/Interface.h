@@ -19,9 +19,6 @@ public:
         
     }
 
-    
-
-
     /* TO FIX
     void printLastQuery(){
         std::vector<std::string> queryVector = dataManager.accessQuery();
