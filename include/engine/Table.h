@@ -16,6 +16,7 @@ public:
 	//Asumire que se mantiene el orden
 	void insertRow(std::vector<std::string>, int);
 	friend std::ostream& operator<<(std::ostream&, const Table&);
+
 };
 
 void Table::insertRow(std::vector<std::string> values, int index) {

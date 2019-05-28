@@ -37,3 +37,5 @@ venv
 bin
 # Vim files
 .*.swp
+*.swp
+*.swo

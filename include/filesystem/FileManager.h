@@ -4,32 +4,38 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include "RandomFile.h"
+#include "StaticHash.h"
+
 class FileManager {
-	std::string filename;
+	typedef std::vector<std::string> Row;
+    std::string fileName;
 	std::vector<std::vector<std::string>> parserCSV(std::string namefile);
 	bool writeBinaryFile(const std::vector<std::vector<std::string>>&);
 	bool readBinaryFile();
 public:
 	FileManager(std::string);
 	void insert();
-	void search();
+	bool search();
+	bool insert(int algorithmCode);
+	void setFileName(std::string _filename);
 };
 
-FileManager::FileManager(std::string filename)
-	: filename(filename)
+FileManager::FileManager(std::string fileName)
+	: fileName(fileName)
 {
-	std::string bin_name = filename.substr(0, filename.size()-3)+"bin";
+	std::string bin_name = fileName.substr(0, fileName.size()-3)+"bin";
 	std::ifstream file(bin_name);
 	bool is_open = file.is_open();
 	file.close();
 	if ( is_open ) return;
-	std::vector<std::vector<std::string>> table = parserCSV(filename);
+	std::vector<std::vector<std::string>> table = parserCSV(fileName);
 	writeBinaryFile(table);
 }
 
 bool FileManager::writeBinaryFile(const std::vector<std::vector<std::string>>& data) {
 	std::ofstream file;
-	std::string bin_name = filename.substr(0, filename.size()-3)+"bin";
+	std::string bin_name = fileName.substr(0, fileName.size()-3)+"bin";
 	int size;
 	file.open(bin_name, std::ios::binary | std::ios::out | std::ios::trunc);
 	for (int i = 0; i < data.size(); i++) {
@@ -73,4 +79,32 @@ std::vector<std::vector<std::string>> FileManager::parserCSV(std::string namefil
 	return data;
 }
 
+void FileManager::setFileName(std::string _filename){
+	this->fileName=_filename;
+}
+
+// Parameters: 1 to insert with RandomFile, 2 to insert with Static Hash 
+bool FileManager::insert(int algorithmCode){
+	switch(algorithmCode){
+		case 1:
+			RandomFile randomFile;
+			//randomFile.insert(Row row);
+			break;
+		case 2:
+			StaticHash staticHash;
+			break;
+	}
+	return false;
+}
+
+bool FileManager::search(){
+	return 0;
+}
+
 #endif
+
+
+
+
+
+
