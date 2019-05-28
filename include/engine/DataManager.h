@@ -1,22 +1,10 @@
 #include "Query.h"
-<<<<<<< HEAD
-//#include "Response.h"
-class Response {
-	
-};
-class DataManager {
-  Query query;
-  Response response;
-
-=======
 #include "Table.h"
 #include "../filesystem/FileManager.h"
 
 class DataManager{
     Query query;
     Table table;
-    
->>>>>>> origin/fsocualaya
 public:
 
     DataManager(){};
@@ -52,8 +40,6 @@ public:
             std::cout<<"No match with statement "<<statement<<'\n'; 
         }
     };
-
-    
 
     std::vector<std::string> accessQuery(){
         return query.getQuery();

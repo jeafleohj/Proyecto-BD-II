@@ -27,7 +27,7 @@ std::ostream& operator<<(std::ostream& os, const Table& table)
 {
 	for (int i = 0; i < table.rows.size(); i++) {
 		for (auto &c : table.columns) {
-			os<< table.rows[i].getColumnValue(c)<<" ";
+			//os<< table.rows[i].getColumnValue(c)<<" ";
 		}
 	}
 	return os;

@@ -45,7 +45,7 @@ void Row::updateData(const Column& c, const std::string &value) {
 }
 
 std::string Row::getColumnValue(Column c) {
-	if( !row.count(c.getName()) )
+	if( !data.count(c.getName()) )
 		//error: no column
 		return "";
 	return data[c.getName()];
