@@ -7,7 +7,7 @@ OBJ=$(patsubst $(SRCDIR)/%,$(BUILD)/%,$(SRCFILES:.cpp=.o))
 TESTOBJ=$(patsubst $(SRCDIR)/%,$(TEST)/%,$(SRCFILES:.cpp=.o))
 LIBS =
 CC = g++
-INC = -I include
+INC = -I include -std=c++17
 
 ALL: $(TARGET)
 
