@@ -61,5 +61,4 @@ std::ostream &operator<<(std::ostream &os, const Column &col) {
 	   << std::to_string(col.getIsPK());
 	return os;
 }
-
 #endif

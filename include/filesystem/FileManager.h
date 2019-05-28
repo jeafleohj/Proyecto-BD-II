@@ -8,16 +8,14 @@
 #include "StaticHash.h"
 
 class FileManager {
-	typedef std::vector<std::string> Row;
-        std::string fileName;
+	std::string fileName;
 	std::vector<std::vector<std::string>> parserCSV(std::string namefile);
 	bool writeBinaryFile(const std::vector<std::vector<std::string>>&);
 	bool readBinaryFile();
 public:
 	FileManager(std::string);
-	void insert();
 	bool search();
-	bool insert(Row row, int algorithmCode);
+	bool insert(std::vector<std::string> row, int algorithmCode);
 	void setFileName(std::string _filename);
 };
 
@@ -40,7 +38,7 @@ bool FileManager::writeBinaryFile(const std::vector<std::vector<std::string>>& d
 	file.open(bin_name, std::ios::binary | std::ios::out | std::ios::trunc);
 	for (int i = 0; i < data.size(); i++) {
 		for (auto &el : data[i]) {
-		        size = el.size();
+			size = el.size();
 			file.write(reinterpret_cast<const char*>(&size), sizeof(int));
 			file.write(el.data(), size);
 		}
@@ -84,14 +82,14 @@ void FileManager::setFileName(std::string _filename){
 }
 
 // Parameters: 1 to insert with RandomFile, 2 to insert with Static Hash 
-bool FileManager::insert(Row row, int algorithmCode){
+bool FileManager::insert(std::vector<std::string> row, int algorithmCode){
+	RandomFile randomFile;
+	StaticHash staticHash;
 	switch(algorithmCode){
 		case 1:
-			RandomFile randomFile;
 			randomFile.insert(row);
 			break;
 		case 2:
-			StaticHash staticHash;
 			break;
 	}
 	return false;
