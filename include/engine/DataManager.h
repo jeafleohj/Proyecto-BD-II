@@ -1,9 +1,11 @@
 #include "Query.h"
-#include "Response.h"
-
-class DataManager{
-    Query query;
-    Response response;
+//#include "Response.h"
+class Response {
+	
+};
+class DataManager {
+  Query query;
+  Response response;
 
 public:
 
