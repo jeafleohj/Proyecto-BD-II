@@ -1,10 +1,8 @@
 #include "Query.h"
-#include "Table.h"
 #include "../filesystem/FileManager.h"
 
 class DataManager{
-    Query query;
-    Table table;
+    Query query; 
 public:
 
     DataManager(){};
@@ -20,9 +18,11 @@ public:
 
     void executeQuery(){
         std::string statement = query.getQuery()[0];
-        if(statement == "SELECT"){
-            std::cout<<"executing a "<<statement<< "query\n";
-        
+        if(statement == "SELECT"){ 
+            FileManager fm;
+            std::string filename = query.getQuery()[3]+".csv"; 
+            fm.setFileName(filename); 
+            std::cout<<fm.search(1, query.getQuery()[1])<<'\n';
         }
         else if(statement == "INSERT"){
             std::cout<<"executing a INSERT query\n";
@@ -34,8 +34,8 @@ public:
         else if(statement == "COPY"){
             std::cout<<"Loading a csv file\n";
             std::string filename = query.getQuery()[3];
-            FileManager fileManager;
-            fileManager.readCSV(filename);
+            //FileManager fileManager;
+            // fileManager.readCSV(filename);
         }
         else{
             std::cout<<"No match with statement "<<statement<<'\n'; 

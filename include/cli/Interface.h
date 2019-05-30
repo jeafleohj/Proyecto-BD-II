@@ -28,7 +28,7 @@ public:
     };
     */
 
-    void displayData(Table _table){
+    void displayData(){
         //TODO
     }
 };

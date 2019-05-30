@@ -8,15 +8,16 @@
 #include "StaticHash.h"
 
 class FileManager {
-	typedef std::vector<std::string> Row;
         std::string fileName;
 	std::vector<std::vector<std::string>> parserCSV(std::string namefile);
 	bool writeBinaryFile(const std::vector<std::vector<std::string>>&);
 	bool readBinaryFile();
 public:
+
+        FileManager(){};
 	FileManager(std::string);
 	void insert();
-	bool search();
+        std::string search(int, std::string);
 	bool insert(Row row, int algorithmCode);
 	void setFileName(std::string _filename);
 };
@@ -80,15 +81,16 @@ std::vector<std::vector<std::string>> FileManager::parserCSV(std::string namefil
 }
 
 void FileManager::setFileName(std::string _filename){
-	this->fileName=_filename;
+	this->fileName="../res/"+_filename;
 }
 
 // Parameters: 1 to insert with RandomFile, 2 to insert with Static Hash 
 bool FileManager::insert(Row row, int algorithmCode){
 	switch(algorithmCode){
-		case 1:
-			RandomFile randomFile;
+		case 1:{
+			RandomFile randomFile(this->fileName);
 			randomFile.insert(row);
+                       }
 			break;
 		case 2:
 			StaticHash staticHash;
@@ -97,8 +99,25 @@ bool FileManager::insert(Row row, int algorithmCode){
 	return false;
 }
 
-bool FileManager::search(){
-	return 0;
+std::string FileManager::search(int algorithmCode, std::string id){
+	switch(algorithmCode){
+	case 1:
+            {
+	    RandomFile randomFile(this->fileName);
+            int position = randomFile.search(id);
+            std::fstream input(fileName, std::ios::in); 
+	    input.seekg(position, std::ios::beg);
+            std::string row;
+            std::getline(input, row);
+            return row; 
+            }
+            break;
+    	case 2:	
+            StaticHash staticHash;
+    	    break;
+        }
+        return "";
 }
+
 
 #endif
