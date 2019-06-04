@@ -21,6 +21,7 @@ public:
 	void search(int value);
 };
 
+//Constructor del archivo
 StaticHash::StaticHash(std::string binfile)
 	: binfile(binfile)
 {
@@ -32,11 +33,14 @@ StaticHash::StaticHash(std::string binfile)
 	generateIndex(binfile);
 }
 
+//Lectura del archivo binario
 std::vector<std::vector<std::string>> StaticHash::loadBinaryFile(std::string biname, std::map<int,int>& pk) {
 	std::ifstream bf(biname, std::ios::binary | std::ios::in);
 	std::vector<std::vector<std::string>> data;
 	std::vector<std::string> row;
 	int n_col,size;
+	//El archivo binario tiene como primer dato el numero de columnas que tiene
+	//El archivo binario tiene la sgte estructura: size(data1)data1 Size(data2)data2 ....
 	bf.read((char*)(&n_col), sizeof(int));
 	row.resize(n_col);
 	int pos;
@@ -47,15 +51,17 @@ std::vector<std::vector<std::string>> StaticHash::loadBinaryFile(std::string bin
 			row[i].resize(size, ' ');
 			bf.read(row[i].data(), size);
 			if(i==0) {
+				//Se almacena la pk con la posicioon en el archivo
 				pk[std::stoi(row[i])] = pos;
 			}
 		}
 		data.push_back(row);
 	}
-	data.pop_back();
+	
 	return data;
 }
 
+//Funcion que escribe los indices por hash
 bool StaticHash::writeIndex(std::map<int, std::vector<int>> ht) {
 	std::ofstream ibf(index, std::ios::binary | std::ios::out);
 	int size;
@@ -84,27 +90,33 @@ void StaticHash::readIndex() {
 	}
 }
 
+//Funcion que genera los indices
 void StaticHash::generateIndex(std::string binfile) {
 	std::map<int,int> pk;
 	std::vector<std::vector<std::string>> lbf = loadBinaryFile(binfile,pk);
 	for(auto &i:pk){
+		//Se realiza un desplazamiento de 7 bits con un modulo de un numero primo
 		ht[((i.first<<7)%101101)].push_back(i.second);
 	}
 }
 
-
+//Funcion de realiza la búsqueda por indice de hash
 void StaticHash::search(int value) {
 	std::ifstream bin(binfile, std::ios::binary | std::ios::in);
 	std::vector<std::string> data ;
 	int size;
+	//Se extrae el numero de columnas
 	bin.read((char*)(&size), sizeof(int));
+	//Se aplica el mismo hash al valor
 	bin.seekg(ht[(value<<7)%101101][0], std::ios::beg);
 	data.resize(size);
+	//Se extrae la info del valor que se almacena en en ese hash
 	for (int i = 0; i < data.size(); i++) {
 		bin.read( (char*)(&size), sizeof(int) );
 		data[i].resize(size);
 		bin.read( data[i].data(), size);
 	}
+	//Impresion de la data que se extrajo
 	for(auto i : data) {
 		std::cout << i << " ";
 	}
